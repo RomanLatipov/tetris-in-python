@@ -1,5 +1,12 @@
 import pygame
 
+# from setting, import everything
+from setting import *
+from sys import exit
+
+#components
+from game import Game
+
 pygame.init()
 
 screen = pygame.display.set_mode((1000, 600))
@@ -30,3 +37,33 @@ while run:
     pygame.display.update()
 
 pygame.quit()
+
+class Main:
+
+    def __init__(self):
+        pygame.init()
+        #display laoyout
+        self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.clock = pygame.time.Clock()
+        pygame.display.set_caption("Tetris")
+
+        self.game = Game()
+
+    def run (self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+            #Background fill color
+            self.display_surface.fill(GREEN)
+            #Run the game.py settings
+            self.game.run()
+
+            pygame.display.update()
+            self.clock.tick()
+
+# to make sure we only run our setting and not anything else
+if __name__ == '__main__':
+    main = Main()
+    main.run()
