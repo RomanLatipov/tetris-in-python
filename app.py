@@ -1,17 +1,32 @@
 import pygame
 
-#Game size
-COLUMNS = 10
-ROWS = 20
-CELL_SIZE = 40
-GAME_WIDTH, GAME_HEIGHT = COLUMNS * CELL_SIZE, ROWS * CELL_SIZE
+pygame.init()
 
-# side bar size
-SIDEBAR_WIDTH = 200
-PREVIEW_HEIGHT_FRACTION = 70
-SCORE_HEIGHT_FRACTION = 1 - PREVIEW_HEIGHT_FRACTION
+screen = pygame.display.set_mode((1000, 600))
 
-#window
-PADDING = 20
-WINDOW_WIDTH = GAME_WIDTH + SIDEBAR_WIDTH + PADDING * 3
-WINDOW_HEIGHT = GAME_HEIGHT + PADDING * 2
+player = pygame.Rect((500, 250, 90, 50))
+
+run = True
+while run:
+
+    screen.fill((0, 0, 0))
+
+    pygame.draw.rect(screen, (255, 0, 0), player)
+
+    key = pygame.key.get_pressed()
+    if key[pygame.K_LEFT] == True:
+        player.move_ip(-1, 0)
+    elif key[pygame.K_RIGHT] == True:
+        player.move_ip(1, 0)
+    elif key[pygame.K_UP] == True:
+        player.move_ip(0, -1)
+    elif key[pygame.K_DOWN] == True:
+        player.move_ip(0, 1)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+    pygame.display.update()
+
+pygame.quit()

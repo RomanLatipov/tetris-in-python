@@ -1,15 +1,17 @@
-import pygame
+import pygame, sys
+from grid import Grid
 
 pygame.init()
 
-screen = pygame.display.set_mode((1000, 600))
+screen = pygame.display.set_mode((300, 600))
 
-player = pygame.Rect((500, 250, 90, 50))
+clock = pygame.time.Clock()
 
-run = True
-while run:
+player = pygame.Rect((0, 0, 50, 50))
+game_grid = Grid()
+game_grid.print_grid()
 
-    screen.fill((0, 0, 0))
+while True:
 
     pygame.draw.rect(screen, (255, 0, 0), player)
 
@@ -23,10 +25,14 @@ while run:
     elif key[pygame.K_DOWN] == True:
         player.move_ip(0, 1)
 
+    player.move_ip(0, 1)
+    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            pygame.quit()
+            sys.exit()
 
+    screen.fill((0, 0, 0))
     pygame.display.update()
-
-pygame.quit()
+    clock.tick(60)
