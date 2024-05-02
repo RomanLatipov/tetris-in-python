@@ -6,7 +6,7 @@ class Game:
     def __init__(self):
         self.grid = Grid()
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
-        self.current_block = self.get_random_block()
+        self.current_block = self.blocks[0]
         self.next_block = self.get_random_block()
 
     def get_random_block(self):
@@ -31,8 +31,18 @@ class Game:
         if self.block_inside() == False:
             self.current_block.move(-1, 0)
 
-    def rotate(self, rotate):
-        self.current_block.rotation_state = rotate
+    def rotation(self):
+        self.current_block.rotate()
+        if self.block_inside() == False:
+            for i in range(4):
+                column = self.current_block.get_cell_position()[i].column
+                if column < 0:
+                    self.current_block.move(0, abs(column))
+                elif column > 9:
+                    self.current_block.move(0, -1)
+                row = self.current_block.get_cell_position()[i].row
+                if row > 19:
+                    self.current_block.move(19-row, 0)
 
     def block_inside(self):
         tiles = self.current_block.get_cell_position()

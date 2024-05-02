@@ -23,10 +23,7 @@ while run:
     elif key[pygame.K_DOWN] == True:
         game.move_down()
     elif key[pygame.K_UP] == True:
-        rotation+=1
-        if rotation == 4:
-            rotation = 0
-        game.rotate(rotation)
+        game.rotation()
         
     screen.fill((255, 255, 255))
     game.draw(screen)
