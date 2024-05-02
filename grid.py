@@ -38,3 +38,8 @@ class Grid:
                     color = (225, 0, 0)
                 cell_rect = pygame.Rect(column*self.cell_size+1, row*self.cell_size+1, self.cell_size-1, self.cell_size-1)
                 pygame.draw.rect(screen, color, cell_rect)
+
+    def is_inside(self, row, column):
+        if row >= 0 and row < self.num_rows and column >= 0 and column < self.num_columns:
+            return True
+        return False
