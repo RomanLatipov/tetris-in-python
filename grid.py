@@ -28,11 +28,6 @@ class Grid:
             [0,0,0,0,0,0,0,0,0,0]
         ]
         # [[0 for i in range(self.num_columns)] for j in range(self.num_rows)]
-    def print_grid(self):
-        for row in range(self.num_rows):
-            for columns in range(self.num_columns):
-                print(self.grid[row][columns], end = " ")
-            print()
 
     def draw(self, screen):
         for row in range(self.num_rows):

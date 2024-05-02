@@ -1,14 +1,12 @@
-import pygame, sys
-from grid import Grid
+import pygame
+from play_game import Game
 
 pygame.init()
 
 screen = pygame.display.set_mode((400, 800))
 clock = pygame.time.Clock()
-
-game_grid = Grid()
-game_grid.grid[0][0] = 1
-game_grid.print_grid()
+game = Game()
+rotation = 0
 
 run = True
 while run:
@@ -16,11 +14,24 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
-    screen.fill((0, 0, 0))
-    game_grid.draw(screen)
+    
+    key = pygame.key.get_pressed()
+    if key[pygame.K_LEFT] == True:
+        game.move_left()
+    elif key[pygame.K_RIGHT] == True:
+        game.move_right()
+    elif key[pygame.K_DOWN] == True:
+        game.move_down()
+    elif key[pygame.K_UP] == True:
+        rotation+=1
+        if rotation == 4:
+            rotation = 0
+        game.rotate(rotation)
+        
+    screen.fill((255, 255, 255))
+    game.draw(screen)
 
     pygame.display.update()
-    clock.tick(60)   
+    clock.tick(15)   
 
 pygame.quit()
