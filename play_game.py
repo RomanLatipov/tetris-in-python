@@ -31,13 +31,6 @@ class Game:
         if self.block_inside() == False or self.block_fits() == False:
             self.current_block.move(-1, 0)
             self.lock_block()
-    
-    def lock_block(self):
-        tiles = self.current_block.get_cell_position()
-        for position in tiles:
-            self.grid.grid[position.row][position.column] = self.current_block.id
-        self.current_block = self.next_block
-        self.next_block = self.get_random_block()
 
     def rotation(self):
         self.current_block.rotate()
@@ -51,6 +44,14 @@ class Game:
                 row = self.current_block.get_cell_position()[i].row
                 if row > 19:
                     self.current_block.move(19-row, 0)
+    
+    def lock_block(self):
+        tiles = self.current_block.get_cell_position()
+        for position in tiles:
+            self.grid.grid[position.row][position.column] = self.current_block.id
+        self.current_block = self.next_block
+        self.next_block = self.get_random_block()
+        self.grid.clear_full_rows()
 
     def block_inside(self):
         tiles = self.current_block.get_cell_position()
