@@ -15,17 +15,20 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == game_update:
+        if event.type == game_update and game.game_over == False:
             game.move_down()
-    
+        if game.game_over == True:
+            game.game_over = False
+            game.reset()
+
     key = pygame.key.get_pressed()
-    if key[pygame.K_LEFT] == True:
+    if key[pygame.K_LEFT] == True and game.game_over == False:
         game.move_left()
-    elif key[pygame.K_RIGHT] == True:
+    elif key[pygame.K_RIGHT] == True and game.game_over == False:
         game.move_right()
-    elif key[pygame.K_DOWN] == True:
+    elif key[pygame.K_DOWN] == True and game.game_over == False:
         game.move_down()
-    elif key[pygame.K_UP] == True:
+    elif key[pygame.K_UP] == True and game.game_over == False:
         game.rotation()
     
     
