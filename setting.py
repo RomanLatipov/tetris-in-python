@@ -24,16 +24,16 @@ ROTATE_WAIT_TIME = 200
 BLOCK_OFFSET =  pygame.Vector2(COLUMNS // 2, -1)
 
 #color
-BACKGROUND = '#4d4d4d'
+BACKGROUND = '#113762'
 LINE_WHITE = "#ffffff"
 BLACK = "#000000"
-PURPLE = '#8b43cc'
-YELLOW = '#e8d915'
-BLUE =  '#155be8'
-ORANGE = '#e89915'
-CYAN = '#43b4a4'
-GREEN = '#1fd118'
-RED = "#d11836"
+PURPLE = '#07bac2'
+YELLOW = '#db8514'
+BLUE =  '#22b349'
+ORANGE = '#d6c30c'
+CYAN = '#6414db'
+GREEN = '#d60ca9'
+RED = "#9d0cd6"
 
 #shapes
 TETROMINOS = {

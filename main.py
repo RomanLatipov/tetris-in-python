@@ -45,7 +45,14 @@ class Main:
                     pygame.quit()
                     exit()
             #Background fill color
-            self.display_surface.fill(BACKGROUND)
+            gradient_colors = [(44,166, 186), (0, 0, 0)] 
+            num_gradient_steps = WINDOW_HEIGHT  # Number of steps in the gradient
+            gradient_step = 1 / num_gradient_steps
+            
+            for i in range(num_gradient_steps):
+                color = tuple(int(gradient_colors[0][c] * (1 - gradient_step * i) + gradient_colors[1][c] * gradient_step * i) for c in range(3))
+                pygame.draw.rect(self.display_surface, color, (0, i, WINDOW_WIDTH, 1))
+
             #Run the game.py settings
             self.game.run() 
             self.score.run()
