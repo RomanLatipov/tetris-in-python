@@ -1,12 +1,10 @@
-from setting import *
+from lib.settings import *
 
 class Score:
     def __init__(self):
-        #placing the score surface ontop of the original surface
-        # Game height and scoreboard need to have the same height, * the percentage we want it to take up, minus the padding
-        self.surface = pygame.Surface((SIDEBAR_WIDTH, GAME_HEIGHT * SCORE_HEIGHT_FRACTION - PADDING))
+        self.surface = pygame.Surface((sidebar_width, game_height * 0.3 - padding))
         self.display_surface = pygame.display.get_surface()
-    
+        self.rect = self.surface.get_rect(bottomright = (window_width - padding, window_height - padding))
+
     def run(self):
-        #blit places one surface on top of another
-        self.display_surface.blit(self.surface, (0,0))
+        self.display_surface.blit(self.surface, self.rect)
