@@ -22,26 +22,30 @@ rotate_wait_time = 200
 block_offset =  pygame.Vector2(columns // 2, -1)
 
 #color
-background = '#4d4d4d'
-white = "#ffffff"
-black = "#000000"
-purple = '#8b43cc'
-yellow = '#e8d915'
-blue =  '#155be8'
-orange = '#e89915'
-cyan = '#43b4a4'
-green = '#1fd118'
-red = "#d11836"
+def colors():
+    background = '#3b3b3b'
+    grey = '#8c8c8c'
+    white = "#ffffff"
+    black = "#000000"
+    purple = '#8b43cc'
+    yellow = '#e8d915'
+    blue =  '#155be8'
+    orange = '#e89915'
+    cyan = '#43b4a4'
+    green = '#1fd118'
+    red = "#d11836"
+
+    return [background, grey, white, black, green, red, orange, yellow, purple, cyan, blue]
 
 #shapes
 tetrominos = {
-    "t" : { "shape": [(0,0), (-1,0), (1,0), (0,-1)], "color": purple},
-    "o" : { "shape": [(0,0), (0,-1), (1,0), (1,-1)], "color": yellow},
-    "j" : { "shape": [(0,0), (0,-1), (0,1), (-1,1)], "color": blue},
-    "l" : { "shape": [(0,0), (0,-1), (0,1), (1,1)], "color": orange},
-    "i" : { "shape": [(0,0), (0,-1), (0,-2), (0,1)], "color": cyan},
-    "s" : { "shape": [(0,0), (-1,0), (0,-1), (1,-1)], "color": green},
-    "z" : { "shape": [(0,0), (1,0), (0, -1), (-1,-1)], "color": red},
+    "t" : { "shape": [(0,0), (-1,0), (1,0), (0,-1)], "color": colors()[8]},
+    "o" : { "shape": [(0,0), (0,-1), (1,0), (1,-1)], "color": colors()[7]},
+    "j" : { "shape": [(0,0), (0,-1), (0,1), (-1,1)], "color": colors()[10]},
+    "l" : { "shape": [(0,0), (0,-1), (0,1), (1,1)], "color": colors()[6]},
+    "i" : { "shape": [(0,0), (0,-1), (0,-2), (0,1)], "color": colors()[9]},
+    "s" : { "shape": [(0,0), (-1,0), (0,-1), (1,-1)], "color": colors()[4]},
+    "z" : { "shape": [(0,0), (1,0), (0, -1), (-1,-1)], "color": colors()[5]},
 }
 
 score_data = {1: 40, 2: 100, 3: 300, 4: 1200}
