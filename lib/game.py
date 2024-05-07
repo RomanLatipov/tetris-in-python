@@ -12,7 +12,7 @@ class Game:
         self.update_score = update_score
         self.grid = Grid(update_score)
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
-        self.block_ids = ["l", "j", "i", "o", "s", "z", "t"]
+        self.block_ids = tetrominos
         self.colors = colors()
         self.current_block = self.get_random_block()
         self.next_block1 = self.get_random_block()
@@ -94,9 +94,9 @@ class Game:
 
     def run(self):
         self.display_surface.blit(self.surface, (padding, padding))
-        self.surface.fill(self.colors[1])
+        self.surface.fill(self.colors[8])
         self.grid.draw(self.surface)
-        pygame.draw.rect(self.display_surface, self.colors[2], self.rect, 2, 2)
+        pygame.draw.rect(self.display_surface, self.colors[9], self.rect, 2, 2)
         self.grid.draw(self.surface)
         self.current_block.draw(self.surface)
         self.preview.run([self.block_ids[self.next_block1.id-1], self.block_ids[self.next_block2.id-1], self.block_ids[self.next_block3.id-1]])

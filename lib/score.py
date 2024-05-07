@@ -24,4 +24,4 @@ class Score:
             y = self.increment_height / 2 + i * self.increment_height
             self.display_text((x,y), text)
         self.display_surface.blit(self.surface, self.rect)
-        pygame.draw.rect(self.display_surface, self.colors[2], self.rect, 2, 2)
+        pygame.draw.rect(self.display_surface, self.colors[9], self.rect, 2, 2)

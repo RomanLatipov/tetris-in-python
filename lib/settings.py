@@ -35,19 +35,11 @@ def colors():
     green = '#1fd118'
     red = "#d11836"
 
-    return [background, grey, white, black, green, red, orange, yellow, purple, cyan, blue]
+    return [background, green, red, orange, yellow, purple, cyan, blue, grey, white, black,]
 
 score_data = {1: 40, 2: 100, 3: 300, 4: 1200}
 
 
 #shapes
-tetrominos = {
-    "l" : { "shape": [(0,0), (0,-1), (0,1), (1,1)], "color": colors()[6]},
-    "t" : { "shape": [(0,0), (-1,0), (1,0), (0,-1)], "color": colors()[8]},
-    "o" : { "shape": [(0,0), (0,-1), (1,0), (1,-1)], "color": colors()[7]},
-    "j" : { "shape": [(0,0), (0,-1), (0,1), (-1,1)], "color": colors()[10]},
-    "i" : { "shape": [(0,0), (0,-1), (0,-2), (0,1)], "color": colors()[9]},
-    "s" : { "shape": [(0,0), (-1,0), (0,-1), (1,-1)], "color": colors()[4]},
-    "z" : { "shape": [(0,0), (1,0), (0, -1), (-1,-1)], "color": colors()[5]},
-}
+tetrominos = ["l", "j", "i", "o", "s", "z", "t"]
 

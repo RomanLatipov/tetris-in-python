@@ -11,7 +11,7 @@ class Preview:
         self.rect = self.surface.get_rect(topright = (window_width - padding, padding))
 
         # shapes
-        self.shape_surfaces = {shape: load(path.join('.','graphics',f'{shape}.png')).convert_alpha() for shape in tetrominos.keys()}
+        self.shape_surfaces = {shape: load(path.join('.','graphics',f'{shape}.png')).convert_alpha() for shape in tetrominos}
         
         #  image poisition data
         self.increment_height = self.surface.get_height() / 3
@@ -28,4 +28,4 @@ class Preview:
         self.surface.fill(colors()[0])
         self.display_pieces(next_shapes)
         self.display_surface.blit(self.surface, self.rect)
-        pygame.draw.rect(self.display_surface, colors()[2], self.rect, 2, 2)
+        pygame.draw.rect(self.display_surface, colors()[9], self.rect, 2, 2)
