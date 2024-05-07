@@ -1,1 +1,1 @@
-This is my personal branch don't push to it!!!
+To run the game type "python main.py" in terminal.

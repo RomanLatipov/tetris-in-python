@@ -1,4 +1,4 @@
-from block import *
+from lib.block import *
 
 class LBlock(Block):
     def __init__(self):

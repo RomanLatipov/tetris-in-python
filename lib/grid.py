@@ -1,35 +1,21 @@
-import pygame
-from colors import Colors
+from lib.settings import *
+from lib.score import Score
 
 class Grid:
-    def __init__(self):
-        self.num_rows = 20
-        self.num_columns = 10
-        self.cell_size = 40
-        self.colors = Colors.get_cell_colors()
-        self.grid = [
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0]
-        ]
-        # [[0 for i in range(self.num_columns)] for j in range(self.num_rows)]
+    def __init__(self, update_score):
+        self.num_rows = rows
+        self.num_columns = columns
+        self.cell_size = cell_size
+        self.colors = colors()
+        self.grid = [[0 for j in range(self.num_columns)] for i in range(self.num_rows)]
+
+        self.current_level = 1
+        self.current_score = 0
+        self.current_lines = 0
+        self.down_speed = update_start_speed
+
+        self.update_score = update_score
+        self.score = Score()
 
     def draw(self, screen):
         for row in range(self.num_rows):
@@ -51,6 +37,7 @@ class Grid:
         for column in range(self.num_columns):
             if self.grid[row][column] == 0:
                 return False
+        self.calculate_score(1)
         return True
     
     def clear_row(self, row):
@@ -70,7 +57,17 @@ class Grid:
                 completed += 1
             elif completed > 0:
                 self.move_row_down(row, completed)
-        return completed
+
+    def calculate_score(self, num_lines):
+        self.current_lines += num_lines 
+        self.current_score += score_data[num_lines] * self.current_level
+
+        #  every 10 lines the level goes up by 1
+        if self.current_lines / 10 >= self.current_level:
+            self.current_level += 1
+            self.down_speed *= 0.75
+        self.update_score(self.current_score, self.current_level, self.current_lines, self.down_speed)
+        # self.score.update_score(self.current_lines, self.current_score, self.current_level)
     
     def reset(self):
         for row in range(self.num_rows):

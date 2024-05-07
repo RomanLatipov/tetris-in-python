@@ -1,41 +1,62 @@
-import pygame
-from play_game import Game
+from lib.settings import *
+from sys import exit
+from lib.game import Game
+from lib.preview import Preview
+from lib.score import Score
 
-pygame.init()
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((window_width, window_height))
+    clock = pygame.time.Clock()
+    game_update = pygame.USEREVENT
+    pygame.time.set_timer(game_update, update_start_speed)
+    preview = Preview()
+    score = Score()
+    
+    class player_score:
+        def __init__(self):
+            self.score = 0
+            self.level = 1
+            self.lines = 0
 
-screen = pygame.display.set_mode((400, 800))
-clock = pygame.time.Clock()
-game = Game()
-game_update = pygame.USEREVENT
-pygame.time.set_timer(game_update, 500)
+    ps = player_score()
+    
+    def update_score(score, level, lines, speed):
+        ps.score = score
+        ps.level = level
+        ps.lines = lines
+        pygame.time.set_timer(game_update, int(speed))
+    
+    game = Game(update_score)
 
-run = True
-while run:
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == game_update and game.game_over == False:
+                game.move_down()
+            if game.game_over == True:
+                game.game_over = False
+                game.reset()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == game_update and game.game_over == False:
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT] == True and game.game_over == False:
+            game.move_left()
+        elif key[pygame.K_RIGHT] == True and game.game_over == False:
+            game.move_right()
+        elif key[pygame.K_DOWN] == True and game.game_over == False:
             game.move_down()
-        if game.game_over == True:
-            game.game_over = False
-            game.reset()
-
-    key = pygame.key.get_pressed()
-    if key[pygame.K_LEFT] == True and game.game_over == False:
-        game.move_left()
-    elif key[pygame.K_RIGHT] == True and game.game_over == False:
-        game.move_right()
-    elif key[pygame.K_DOWN] == True and game.game_over == False:
-        game.move_down()
-    elif key[pygame.K_UP] == True and game.game_over == False:
-        game.rotation()
+        elif key[pygame.K_UP] == True and game.game_over == False:
+            game.rotation()
+                
+        screen.fill(colors()[0])
+        game.run()
+        # preview.run()
+        score.run(ps.score, ps.level, ps.lines)
+       
+        pygame.display.update()
+        clock.tick(12)
     
-    
-    screen.fill((255, 255, 255))
-    game.draw(screen)
-
-    pygame.display.update()
-    clock.tick(15)   
-
-pygame.quit()
+if __name__ == '__main__':
+    main()

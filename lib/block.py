@@ -1,11 +1,11 @@
-import pygame
-from colors import Colors
+from lib.settings import *
+
 class Block:
     def __init__(self, id):
         self.id = id
         self.cells = {}
-        self.cell_size = 40
-        self.colors = Colors.get_cell_colors()
+        self.cell_size = cell_size
+        self.colors = colors()
         self.row_offset = 0
         self.column_offset = 0
         self.rotation_state = 0
