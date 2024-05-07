@@ -20,7 +20,7 @@ class Grid:
     def draw(self, screen):
         for row in range(self.num_rows):
             for column in range(self.num_columns):
-                cell_rect = pygame.Rect(column*self.cell_size+1, row*self.cell_size+1, self.cell_size-1, self.cell_size-1)
+                cell_rect = pygame.Rect(column * self.cell_size + 1, row * self.cell_size + 1, self.cell_size - 1, self.cell_size - 1)
                 pygame.draw.rect(screen, self.colors[self.grid[row][column]], cell_rect)
 
     def is_inside(self, row, column):
@@ -37,7 +37,6 @@ class Grid:
         for column in range(self.num_columns):
             if self.grid[row][column] == 0:
                 return False
-        self.calculate_score(1)
         return True
     
     def clear_row(self, row):
@@ -57,9 +56,11 @@ class Grid:
                 completed += 1
             elif completed > 0:
                 self.move_row_down(row, completed)
+        if completed > 0:
+            self.calculate_score(completed)
 
     def calculate_score(self, num_lines):
-        self.current_lines += num_lines 
+        self.current_lines += num_lines
         self.current_score += score_data[num_lines] * self.current_level
 
         #  every 10 lines the level goes up by 1
@@ -67,7 +68,6 @@ class Grid:
             self.current_level += 1
             self.down_speed *= 0.75
         self.update_score(self.current_score, self.current_level, self.current_lines, self.down_speed)
-        # self.score.update_score(self.current_lines, self.current_score, self.current_level)
     
     def reset(self):
         for row in range(self.num_rows):

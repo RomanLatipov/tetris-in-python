@@ -1,7 +1,6 @@
 from lib.settings import *
 from sys import exit
 from lib.game import Game
-from lib.preview import Preview
 from lib.score import Score
 
 def main():
@@ -10,9 +9,8 @@ def main():
     clock = pygame.time.Clock()
     game_update = pygame.USEREVENT
     pygame.time.set_timer(game_update, update_start_speed)
-    preview = Preview()
     score = Score()
-    
+
     class player_score:
         def __init__(self):
             self.score = 0
@@ -52,7 +50,6 @@ def main():
                 
         screen.fill(colors()[0])
         game.run()
-        # preview.run()
         score.run(ps.score, ps.level, ps.lines)
        
         pygame.display.update()

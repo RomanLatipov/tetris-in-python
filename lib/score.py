@@ -12,21 +12,10 @@ class Score:
 
         self.colors = colors()
 
-        self.lines = 0
-        self.score = 0
-        self.level = 1
-        
-
     def display_text(self, pos, text):
         text_surface = self.font.render(f'{text[0]}: {text[1]}', True, 'white')
         text_rext = text_surface.get_rect(center = pos)
         self.surface.blit(text_surface, text_rext)
-
-    # def update_score(self, score, level, lines):
-    #     print(score, self.score)
-    #     self.lines = lines
-    #     self.score = score
-    #     self.level = level
                 
     def run(self, score, level, lines):
         self.surface.fill(self.colors[0])

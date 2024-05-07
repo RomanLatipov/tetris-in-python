@@ -12,9 +12,12 @@ class Game:
         self.update_score = update_score
         self.grid = Grid(update_score)
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
+        self.block_ids = ["l", "j", "i", "o", "s", "z", "t"]
         self.colors = colors()
         self.current_block = self.get_random_block()
-        self.next_block = self.get_random_block()
+        self.next_block1 = self.get_random_block()
+        self.next_block2 = self.get_random_block()
+        self.next_block3 = self.get_random_block()
         self.game_over = False
         self.preview = Preview()
 
@@ -22,7 +25,9 @@ class Game:
         self.grid.reset()
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         self.current_block = self.get_random_block()
-        self.next_block = self.get_random_block()
+        self.next_block1 = self.get_random_block()
+        self.next_block2 = self.get_random_block()
+        self.next_block3 = self.get_random_block()
         self.update_score(0, 1, 0, update_start_speed)
 
     def get_random_block(self):
@@ -65,8 +70,10 @@ class Game:
         tiles = self.current_block.get_cell_position()
         for position in tiles:
             self.grid.grid[position.row][position.column] = self.current_block.id
-        self.current_block = self.next_block
-        self.next_block = self.get_random_block()
+        self.current_block = self.next_block1
+        self.next_block1 = self.next_block2
+        self.next_block2 = self.next_block3
+        self.next_block3 = self.get_random_block()
         self.grid.clear_full_rows()
         if self.block_fits() == False:
             self.game_over = True
@@ -92,3 +99,4 @@ class Game:
         pygame.draw.rect(self.display_surface, self.colors[2], self.rect, 2, 2)
         self.grid.draw(self.surface)
         self.current_block.draw(self.surface)
+        self.preview.run([self.block_ids[self.next_block1.id-1], self.block_ids[self.next_block2.id-1], self.block_ids[self.next_block3.id-1]])
