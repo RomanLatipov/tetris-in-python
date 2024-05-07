@@ -48,7 +48,13 @@ def main():
         elif key[pygame.K_UP] == True and game.game_over == False:
             game.rotation()
                 
-        screen.fill(colors()[0])
+        gradient_colors = [(255, 255, 255), (0,0,0)] 
+        num_gradient_steps = window_width  # Number of steps in the gradient
+        gradient_step = 1 / num_gradient_steps
+            
+        for i in range(num_gradient_steps):
+                color = tuple(int(gradient_colors[0][c] * (1 - gradient_step * i) + gradient_colors[1][c] * gradient_step * i) for c in range(3))
+                pygame.draw.rect(screen, color, (0, i, window_width, 1))
         game.run()
         score.run(ps.score, ps.level, ps.lines)
        
