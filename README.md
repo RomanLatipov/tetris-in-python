@@ -23,6 +23,9 @@ python lib/main.py
 
 **Press down key:** to move the shape quickly down 
 
+**Press down key:** to move the shape down quickly 
+
+
 ## Rules, levels, and scoring
 Clearing each set of 10 lines advances the game level by one and increases the rate of descent for the pieces. A preview screen is available to show you the next 3 pieces.
 
